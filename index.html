@@ -39,6 +39,19 @@
   .hero h1{margin:0; font-size:30px; line-height:1.2; font-weight:800}
   .hero .upd{margin:14px 0 0; color:#9FB3C8; font-size:14px}
 
+  /* Language switcher */
+  .langs{
+    display:inline-flex; gap:6px; margin-bottom:22px; background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.14); border-radius:999px; padding:4px;
+  }
+  .langs button{
+    appearance:none; border:0; background:transparent; color:#9FB3C8; cursor:pointer;
+    font-weight:700; font-size:13px; letter-spacing:.5px; padding:6px 14px; border-radius:999px;
+    transition:background .15s, color .15s;
+  }
+  .langs button.active{background:var(--green); color:#04130c}
+  .langs button:hover:not(.active){color:#fff}
+
   /* Layout */
   .wrap{max-width:760px; margin:-32px auto 0; padding:0 18px 80px; position:relative; z-index:1}
   .card{
@@ -95,11 +108,28 @@
 <body>
   <header class="hero">
     <div class="brand"><span class="dot"></span> Ripple</div>
-    <h1>Política de Privacidad</h1>
-    <p class="upd">Última actualización: 15 de junio de 2026</p>
+    <div class="langs" id="langs">
+      <button data-lang="es">ES</button>
+      <button data-lang="en">EN</button>
+      <button data-lang="pt">PT</button>
+    </div>
+    <h1 id="title"></h1>
+    <p class="upd" id="updated"></p>
   </header>
 
-  <main class="wrap">
+  <main class="wrap" id="content"></main>
+
+  <footer><span class="dot"></span> <span id="footer"></span></footer>
+
+<script>
+const I18N = {
+  es: {
+    htmlLang: "es",
+    docTitle: "Política de Privacidad · Ripple",
+    title: "Política de Privacidad",
+    updated: "Última actualización: 15 de junio de 2026",
+    footer: "Ripple · Construye buenos hábitos, cuida tu privacidad.",
+    content: `
     <div class="card">
       <p class="intro">En Ripple creemos que construir buenos hábitos no debería significar renunciar a tu privacidad. Esta política explica de forma clara <strong>qué información utilizamos, por qué la utilizamos y qué control tienes sobre ella.</strong></p>
       <p class="muted">¿Dudas? Escríbenos a <a href="mailto:rippleappsupport@gmail.com">rippleappsupport@gmail.com</a></p>
@@ -260,11 +290,376 @@
     <div class="card contact">
       <p>Si tienes preguntas, comentarios o inquietudes relacionadas con la privacidad o el tratamiento de tus datos, puedes comunicarte con nosotros en:</p>
       <p class="mail"><a href="mailto:rippleappsupport@gmail.com">rippleappsupport@gmail.com</a></p>
-    </div>
-  </main>
+    </div>`
+  },
 
-  <footer>
-    <span class="dot"></span> Ripple · Construye buenos hábitos, cuida tu privacidad.
-  </footer>
+  en: {
+    htmlLang: "en",
+    docTitle: "Privacy Policy · Ripple",
+    title: "Privacy Policy",
+    updated: "Last updated: June 15, 2026",
+    footer: "Ripple · Build good habits, protect your privacy.",
+    content: `
+    <div class="card">
+      <p class="intro">At Ripple we believe that building good habits shouldn't mean giving up your privacy. This policy explains clearly <strong>what information we use, why we use it and what control you have over it.</strong></p>
+      <p class="muted">Questions? Write to us at <a href="mailto:rippleappsupport@gmail.com">rippleappsupport@gmail.com</a></p>
+    </div>
+
+    <h2>Quick summary</h2>
+    <div class="card">
+      <ul class="check">
+        <li>We only collect the information necessary for the app to work.</li>
+        <li>Your habits and progress are yours.</li>
+        <li>We never sell your personal data.</li>
+        <li>We don't use your information for personalized advertising.</li>
+        <li>You can request deletion of your account and data at any time.</li>
+      </ul>
+    </div>
+
+    <h2>What information we collect</h2>
+    <div class="card">
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Information</th><th>Purpose</th><th>Required</th></tr></thead>
+          <tbody>
+            <tr><td>Email</td><td>Create and maintain your account</td><td><span class="pill yes">Yes</span></td></tr>
+            <tr><td>Name or profile name</td><td>Personalize your experience</td><td><span class="pill yes">Yes</span></td></tr>
+            <tr><td>Country (optional)</td><td>General community statistics and basic personalization</td><td><span class="pill no">No</span></td></tr>
+            <tr><td>Habits, check-ins, streaks, levels, achievements and progress</td><td>Display and save your evolution within the app</td><td><span class="pill yes">Yes</span></td></tr>
+            <tr><td>Notification token</td><td>Send you reminders if you choose to enable them</td><td><span class="pill no">No</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h2>Information we do NOT collect</h2>
+    <div class="card">
+      <p>Ripple does not collect or store:</p>
+      <ul class="dash">
+        <li>Your GPS location.</li>
+        <li>Your contacts.</li>
+        <li>Your photos.</li>
+        <li>Your microphone.</li>
+        <li>Your camera for the normal operation of the app.</li>
+        <li>Financial information.</li>
+        <li>Sensitive medical or health data.</li>
+        <li>Private messages outside the app's operation.</li>
+      </ul>
+    </div>
+
+    <h2>Biometrics (Fingerprint and Face ID)</h2>
+    <div class="card">
+      <p>If you choose to use biometric authentication, <strong>your biometric data is never stored on our servers.</strong></p>
+      <p>Validation is handled entirely by your device's operating system. Ripple only receives a secure confirmation that authentication was successful.</p>
+      <p>We never have access to your fingerprint, face or actual biometric information.</p>
+    </div>
+
+    <h2>What we use your data for</h2>
+    <div class="card">
+      <p>We use the information only to:</p>
+      <ul class="plain">
+        <li>Create and manage your account.</li>
+        <li>Save your progress and sync it across devices.</li>
+        <li>Show statistics and personal evolution.</li>
+        <li>Maintain your streaks, levels and achievements.</li>
+        <li>Send reminders if you have enabled them.</li>
+        <li>Improve the operation, stability and security of the app.</li>
+        <li>Comply with legal obligations when necessary.</li>
+      </ul>
+      <p>We do not use your data to sell commercial profiles or for personalized advertising.</p>
+    </div>
+
+    <h2>Legal basis for processing</h2>
+    <div class="card">
+      <p>We process your information based on:</p>
+      <ul class="plain">
+        <li>The performance of the service requested by the user.</li>
+        <li>Your consent, when you enable optional features such as notifications.</li>
+        <li>Our legitimate interest in maintaining the security and stability of the app.</li>
+        <li>Compliance with applicable legal obligations.</li>
+      </ul>
+    </div>
+
+    <h2>Device permissions</h2>
+    <div class="card">
+      <h3>Notifications</h3>
+      <p>To send you reminders related to your habits if you choose to enable them.</p>
+      <h3>Exact alarms and reminders</h3>
+      <p>Ripple may request permission to schedule exact reminders on Android. This permission is used only to send habit reminders at the time the user chooses within the app.</p>
+      <p>Ripple does not use this permission to show advertising, track user activity or run functions unrelated to habit reminders. The user can disable reminders from the app or device settings.</p>
+      <h3>Biometric authentication</h3>
+      <p>To allow secure access via fingerprint or Face ID.</p>
+      <p class="muted">Ripple does not request location, contacts, camera or microphone permissions for its normal operation.</p>
+    </div>
+
+    <h2>Who we share information with</h2>
+    <div class="card">
+      <p>To provide the service we use trusted technology providers that process data only to provide their services. We currently work with:</p>
+      <ul class="plain">
+        <li><strong>Supabase</strong> — secure storage of accounts and progress.</li>
+        <li><strong>Google</strong> — authentication via "Sign in with Google" if the user chooses to use it.</li>
+        <li><strong>Expo</strong> — delivery of push notifications.</li>
+      </ul>
+      <p>These providers are not authorized to use your data for their own purposes other than providing the service.</p>
+    </div>
+
+    <h2>Where data is stored</h2>
+    <div class="card">
+      <p>Information may be stored and processed on servers provided by our technology providers, which may be located in different countries.</p>
+      <p>We work to ensure that data processing is carried out using reasonable security and protection measures.</p>
+    </div>
+
+    <h2>Information security</h2>
+    <div class="card">
+      <p>We take technical and organizational measures to protect your information, including:</p>
+      <ul class="plain">
+        <li>Encrypted communication between the app and the servers.</li>
+        <li>Access controls so each user can only access their own information.</li>
+        <li>Protection of authentication credentials.</li>
+        <li>Continuous updating and maintenance of our systems.</li>
+      </ul>
+      <p>Although no system can guarantee absolute security, we work to reduce risks to the maximum reasonable extent.</p>
+    </div>
+
+    <h2>Data retention</h2>
+    <div class="card">
+      <p>We will keep your information while your account remains active and is necessary to provide the service.</p>
+      <p>If you request deletion of your account, we will delete or anonymize the associated data, except for that which we must retain by legal obligation.</p>
+    </div>
+
+    <h2>Your rights</h2>
+    <div class="card">
+      <p>You may request at any time to:</p>
+      <ul class="plain">
+        <li>Access the information we have about you.</li>
+        <li>Correct incorrect or outdated data.</li>
+        <li>Delete your account and associated data.</li>
+        <li>Stop receiving notifications.</li>
+        <li>Make inquiries related to the processing of your information.</li>
+      </ul>
+      <p>To do so, write to us at <a href="mailto:rippleappsupport@gmail.com">rippleappsupport@gmail.com</a>. We will try to respond to and process requests as soon as possible and normally within a maximum of 30 days.</p>
+    </div>
+
+    <h2>Account deletion</h2>
+    <div class="card">
+      <p>You can request permanent deletion of your account and associated data by sending an email to <a href="mailto:rippleappsupport@gmail.com">rippleappsupport@gmail.com</a>.</p>
+      <p>Once the request is processed, your progress and associated information will be deleted or anonymized, except where there is a legal retention obligation.</p>
+    </div>
+
+    <h2>Minors</h2>
+    <div class="card">
+      <p>Ripple is intended for people over 13 years of age. We do not knowingly collect personal information from minors under that age. If we discover that a person under 13 has registered, we will take reasonable steps to delete that information.</p>
+    </div>
+
+    <h2>Changes to this policy</h2>
+    <div class="card">
+      <p>We may update this Privacy Policy when necessary to reflect improvements in the app, legal changes or new services. When this happens, we will publish the updated version indicating the date of the last modification.</p>
+    </div>
+
+    <h2>Contact</h2>
+    <div class="card contact">
+      <p>If you have questions, comments or concerns related to privacy or the processing of your data, you can reach us at:</p>
+      <p class="mail"><a href="mailto:rippleappsupport@gmail.com">rippleappsupport@gmail.com</a></p>
+    </div>`
+  },
+
+  pt: {
+    htmlLang: "pt",
+    docTitle: "Política de Privacidade · Ripple",
+    title: "Política de Privacidade",
+    updated: "Última atualização: 15 de junho de 2026",
+    footer: "Ripple · Construa bons hábitos, cuide da sua privacidade.",
+    content: `
+    <div class="card">
+      <p class="intro">Na Ripple acreditamos que construir bons hábitos não deveria significar abrir mão da sua privacidade. Esta política explica de forma clara <strong>quais informações utilizamos, por que as utilizamos e que controle você tem sobre elas.</strong></p>
+      <p class="muted">Dúvidas? Escreva para <a href="mailto:rippleappsupport@gmail.com">rippleappsupport@gmail.com</a></p>
+    </div>
+
+    <h2>Resumo rápido</h2>
+    <div class="card">
+      <ul class="check">
+        <li>Só coletamos as informações necessárias para o aplicativo funcionar.</li>
+        <li>Seus hábitos e progresso são seus.</li>
+        <li>Nunca vendemos seus dados pessoais.</li>
+        <li>Não utilizamos suas informações para publicidade personalizada.</li>
+        <li>Você pode solicitar a exclusão da sua conta e dos seus dados a qualquer momento.</li>
+      </ul>
+    </div>
+
+    <h2>Quais informações coletamos</h2>
+    <div class="card">
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Informação</th><th>Finalidade</th><th>Obrigatória</th></tr></thead>
+          <tbody>
+            <tr><td>E-mail</td><td>Criar e manter sua conta</td><td><span class="pill yes">Sim</span></td></tr>
+            <tr><td>Nome ou nome de perfil</td><td>Personalizar sua experiência</td><td><span class="pill yes">Sim</span></td></tr>
+            <tr><td>País (opcional)</td><td>Estatísticas gerais da comunidade e personalização básica</td><td><span class="pill no">Não</span></td></tr>
+            <tr><td>Hábitos, check-ins, sequências, níveis, conquistas e progresso</td><td>Mostrar e salvar sua evolução dentro do aplicativo</td><td><span class="pill yes">Sim</span></td></tr>
+            <tr><td>Token de notificações</td><td>Enviar lembretes se você decidir ativá-los</td><td><span class="pill no">Não</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h2>Informações que NÃO coletamos</h2>
+    <div class="card">
+      <p>A Ripple não coleta nem armazena:</p>
+      <ul class="dash">
+        <li>Sua localização GPS.</li>
+        <li>Seus contatos.</li>
+        <li>Suas fotografias.</li>
+        <li>Seu microfone.</li>
+        <li>Sua câmera para o funcionamento normal do aplicativo.</li>
+        <li>Informações financeiras.</li>
+        <li>Dados médicos ou de saúde sensíveis.</li>
+        <li>Mensagens privadas externas ao funcionamento do aplicativo.</li>
+      </ul>
+    </div>
+
+    <h2>Biometria (Digital e Face ID)</h2>
+    <div class="card">
+      <p>Se você decidir usar autenticação biométrica, <strong>seus dados biométricos nunca são armazenados em nossos servidores.</strong></p>
+      <p>A validação é gerenciada completamente pelo sistema operacional do seu dispositivo. A Ripple recebe apenas uma confirmação segura indicando que a autenticação foi correta.</p>
+      <p>Nunca temos acesso à sua digital, rosto ou informação biométrica real.</p>
+    </div>
+
+    <h2>Para que utilizamos seus dados</h2>
+    <div class="card">
+      <p>Utilizamos as informações apenas para:</p>
+      <ul class="plain">
+        <li>Criar e administrar sua conta.</li>
+        <li>Salvar seu progresso e sincronizá-lo entre dispositivos.</li>
+        <li>Mostrar estatísticas e evolução pessoal.</li>
+        <li>Manter suas sequências, níveis e conquistas.</li>
+        <li>Enviar lembretes se você os tiver ativado.</li>
+        <li>Melhorar o funcionamento, estabilidade e segurança do aplicativo.</li>
+        <li>Cumprir obrigações legais quando necessário.</li>
+      </ul>
+      <p>Não utilizamos seus dados para vender perfis comerciais nem para publicidade personalizada.</p>
+    </div>
+
+    <h2>Base legal do tratamento</h2>
+    <div class="card">
+      <p>Tratamos suas informações com base em:</p>
+      <ul class="plain">
+        <li>A execução do serviço solicitado pelo usuário.</li>
+        <li>Seu consentimento, quando você ativa funções opcionais como as notificações.</li>
+        <li>Nosso interesse legítimo em manter a segurança e estabilidade do aplicativo.</li>
+        <li>O cumprimento de obrigações legais aplicáveis.</li>
+      </ul>
+    </div>
+
+    <h2>Permissões do dispositivo</h2>
+    <div class="card">
+      <h3>Notificações</h3>
+      <p>Para enviar lembretes relacionados aos seus hábitos se você decidir ativá-los.</p>
+      <h3>Alarmes e lembretes exatos</h3>
+      <p>A Ripple pode solicitar permissão para programar lembretes exatos no Android. Esta permissão é usada apenas para enviar lembretes de hábitos no horário que o usuário escolhe dentro do aplicativo.</p>
+      <p>A Ripple não usa esta permissão para exibir publicidade, rastrear atividade do usuário nem executar funções não relacionadas aos lembretes de hábitos. O usuário pode desativar os lembretes nas configurações do aplicativo ou do dispositivo.</p>
+      <h3>Autenticação biométrica</h3>
+      <p>Para permitir o acesso seguro por meio de digital ou Face ID.</p>
+      <p class="muted">A Ripple não solicita permissões de localização, contatos, câmera ou microfone para seu funcionamento normal.</p>
+    </div>
+
+    <h2>Com quem compartilhamos as informações</h2>
+    <div class="card">
+      <p>Para oferecer o serviço utilizamos provedores tecnológicos de confiança que processam dados apenas para prestar seus serviços. Atualmente trabalhamos com:</p>
+      <ul class="plain">
+        <li><strong>Supabase</strong> — armazenamento seguro de contas e progresso.</li>
+        <li><strong>Google</strong> — autenticação por meio de "Entrar com o Google" se o usuário decidir utilizá-la.</li>
+        <li><strong>Expo</strong> — entrega de notificações push.</li>
+      </ul>
+      <p>Esses provedores não recebem autorização para utilizar seus dados com fins próprios diferentes da prestação do serviço.</p>
+    </div>
+
+    <h2>Onde os dados são armazenados</h2>
+    <div class="card">
+      <p>As informações podem ser armazenadas e processadas em servidores fornecidos por nossos provedores tecnológicos, que podem estar localizados em diferentes países.</p>
+      <p>Trabalhamos para que o tratamento dos dados seja realizado utilizando medidas razoáveis de segurança e proteção.</p>
+    </div>
+
+    <h2>Segurança da informação</h2>
+    <div class="card">
+      <p>Tomamos medidas técnicas e organizacionais para proteger suas informações, incluindo:</p>
+      <ul class="plain">
+        <li>Comunicação criptografada entre o aplicativo e os servidores.</li>
+        <li>Controles de acesso para que cada usuário só possa acessar suas próprias informações.</li>
+        <li>Proteção das credenciais de autenticação.</li>
+        <li>Atualização e manutenção contínua de nossos sistemas.</li>
+      </ul>
+      <p>Embora nenhum sistema possa garantir segurança absoluta, trabalhamos para reduzir os riscos ao máximo razoável.</p>
+    </div>
+
+    <h2>Conservação dos dados</h2>
+    <div class="card">
+      <p>Conservaremos suas informações enquanto sua conta permanecer ativa e for necessária para prestar o serviço.</p>
+      <p>Se você solicitar a exclusão da sua conta, excluiremos ou anonimizaremos os dados associados, exceto aqueles que devamos conservar por obrigação legal.</p>
+    </div>
+
+    <h2>Seus direitos</h2>
+    <div class="card">
+      <p>Você pode solicitar a qualquer momento:</p>
+      <ul class="plain">
+        <li>Acessar as informações que temos sobre você.</li>
+        <li>Corrigir dados incorretos ou desatualizados.</li>
+        <li>Excluir sua conta e os dados associados.</li>
+        <li>Deixar de receber notificações.</li>
+        <li>Fazer consultas relacionadas ao tratamento das suas informações.</li>
+      </ul>
+      <p>Para isso, escreva para <a href="mailto:rippleappsupport@gmail.com">rippleappsupport@gmail.com</a>. Tentaremos responder e processar as solicitações o mais rápido possível e, normalmente, em um prazo máximo de 30 dias.</p>
+    </div>
+
+    <h2>Exclusão da conta</h2>
+    <div class="card">
+      <p>Você pode solicitar a exclusão permanente da sua conta e dos dados associados enviando um e-mail para <a href="mailto:rippleappsupport@gmail.com">rippleappsupport@gmail.com</a>.</p>
+      <p>Uma vez processada a solicitação, seu progresso e as informações associadas serão excluídos ou anonimizados, exceto quando exista uma obrigação legal de conservação.</p>
+    </div>
+
+    <h2>Menores de idade</h2>
+    <div class="card">
+      <p>A Ripple é destinada a pessoas maiores de 13 anos. Não coletamos conscientemente informações pessoais de menores dessa idade. Se descobrirmos que uma pessoa menor de 13 anos se registrou, tomaremos medidas razoáveis para excluir essa informação.</p>
+    </div>
+
+    <h2>Alterações nesta política</h2>
+    <div class="card">
+      <p>Podemos atualizar esta Política de Privacidade quando necessário para refletir melhorias no aplicativo, mudanças legais ou novos serviços. Quando isso ocorrer, publicaremos a versão atualizada indicando a data da última modificação.</p>
+    </div>
+
+    <h2>Contato</h2>
+    <div class="card contact">
+      <p>Se você tiver perguntas, comentários ou preocupações relacionadas à privacidade ou ao tratamento dos seus dados, pode entrar em contato conosco em:</p>
+      <p class="mail"><a href="mailto:rippleappsupport@gmail.com">rippleappsupport@gmail.com</a></p>
+    </div>`
+  }
+};
+
+function pickLang() {
+  const saved = localStorage.getItem("ripple_policy_lang");
+  if (saved && I18N[saved]) return saved;
+  const nav = (navigator.language || "es").slice(0,2).toLowerCase();
+  return I18N[nav] ? nav : "es";
+}
+
+function render(lang) {
+  const d = I18N[lang] || I18N.es;
+  document.documentElement.lang = d.htmlLang;
+  document.title = d.docTitle;
+  document.getElementById("title").textContent = d.title;
+  document.getElementById("updated").textContent = d.updated;
+  document.getElementById("footer").textContent = d.footer;
+  document.getElementById("content").innerHTML = d.content;
+  document.querySelectorAll("#langs button").forEach(b => {
+    b.classList.toggle("active", b.dataset.lang === lang);
+  });
+  localStorage.setItem("ripple_policy_lang", lang);
+}
+
+document.querySelectorAll("#langs button").forEach(b => {
+  b.addEventListener("click", () => render(b.dataset.lang));
+});
+
+render(pickLang());
+</script>
 </body>
 </html>
