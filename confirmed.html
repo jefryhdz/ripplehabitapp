@@ -73,7 +73,12 @@
 <script>
 // La confirmación ya ocurrió en el endpoint de Supabase. Esta página es solo
 // informativa: NO procesa el token. Detecta únicamente si hubo error en el enlace.
-var hasError = /[?#&]error/i.test(location.search + location.hash);
+var qs = location.search + location.hash;
+var hasError = /[?#&]error/i.test(qs);
+// Solo es acceso legítimo si llegó con parámetros (Supabase siempre adjunta algo al
+// redirigir: ?code=, #access_token=, ?error=...). Una visita directa a la URL limpia
+// no trae nada → no mostramos "confirmado".
+var viaLink = /[?#].+/.test(qs);
 
 // Limpiar la URL (quita ?code / #access_token / ?error) para no exponerla ni dejarla en el historial.
 try { history.replaceState({}, "", location.pathname); } catch (e) {}
@@ -83,18 +88,21 @@ var I18N = {
     htmlLang: "es", docTitle: "Confirmación · Ripple",
     ok:  { title: "¡Correo confirmado!", msg: "Tu cuenta quedó verificada. Vuelve a Ripple e inicia sesión para empezar." },
     err: { title: "Enlace no válido", msg: "Este enlace expiró o ya fue usado. Abre Ripple e intenta registrarte de nuevo para recibir uno nuevo." },
+    direct: { title: "Página no disponible", msg: "Esta página solo se abre desde el enlace de confirmación que enviamos a tu correo. Abre Ripple para continuar." },
     cta: "Abrir Ripple"
   },
   en: {
     htmlLang: "en", docTitle: "Confirmation · Ripple",
     ok:  { title: "Email confirmed!", msg: "Your account is verified. Go back to Ripple and sign in to get started." },
     err: { title: "Invalid link", msg: "This link has expired or was already used. Open Ripple and try signing up again to get a new one." },
+    direct: { title: "Page not available", msg: "This page only opens from the confirmation link we sent to your email. Open Ripple to continue." },
     cta: "Open Ripple"
   },
   pt: {
     htmlLang: "pt", docTitle: "Confirmação · Ripple",
     ok:  { title: "E-mail confirmado!", msg: "Sua conta foi verificada. Volte ao Ripple e faça login para começar." },
     err: { title: "Link inválido", msg: "Este link expirou ou já foi usado. Abra o Ripple e tente se cadastrar novamente para receber um novo." },
+    direct: { title: "Página indisponível", msg: "Esta página só abre a partir do link de confirmação que enviamos ao seu e-mail. Abra o Ripple para continuar." },
     cta: "Abrir Ripple"
   }
 };
@@ -107,11 +115,12 @@ function pickLang() {
 
 function render(lang) {
   var d = I18N[lang] || I18N.es;
-  var state = hasError ? d.err : d.ok;
+  var isOk = viaLink && !hasError;
+  var state = !viaLink ? d.direct : (hasError ? d.err : d.ok);
   document.documentElement.lang = d.htmlLang;
   document.title = d.docTitle;
-  document.getElementById("icon").textContent = hasError ? "⚠️" : "✅";
-  document.getElementById("icon").className = "icon" + (hasError ? " err" : "");
+  document.getElementById("icon").textContent = isOk ? "✅" : (hasError ? "⚠️" : "🔒");
+  document.getElementById("icon").className = "icon" + (isOk ? "" : " err");
   document.getElementById("title").textContent = state.title;
   document.getElementById("msg").textContent = state.msg;
   document.getElementById("cta").textContent = d.cta;
