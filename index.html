@@ -3,18 +3,268 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Política de Privacidad de Ripple</title>
+<meta name="robots" content="index, follow">
+<meta name="description" content="Política de Privacidad de Ripple: qué datos usamos, por qué y qué control tienes sobre ellos.">
+<title>Política de Privacidad · Ripple</title>
 <style>
-  body { margin:0; background:#F8FAFF; color:#111827;
-         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
-  /* Override del ancho fijo de Google Docs para que sea responsivo */
-  .doc-content { max-width:760px !important; width:auto !important;
-                 margin:0 auto !important; padding:24px 18px 64px !important;
-                 background:transparent !important; box-shadow:none !important; }
-  img { max-width:100%; height:auto; }
+  :root{
+    --green:#22C55E; --green-d:#16A34A; --bio:#00E5A0;
+    --ocean:#060E1A; --ink:#111827; --muted:#64748B; --line:#E5EAF2;
+    --bg:#F8FAFF; --card:#FFFFFF; --amber:#F59E0B;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.65; font-size:17px;
+  }
+  a{color:var(--green-d); text-decoration:none; font-weight:600}
+  a:hover{text-decoration:underline}
+
+  /* Header */
+  .hero{
+    background:linear-gradient(135deg,var(--ocean) 0%,#0B2138 55%,#0E3A4A 100%);
+    color:#fff; padding:56px 22px 64px; text-align:center; position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:""; position:absolute; left:0; right:0; bottom:-1px; height:48px;
+    background:radial-gradient(120% 100% at 50% 0%, rgba(0,229,160,.25), transparent 70%);
+  }
+  .brand{
+    display:inline-flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.5px;
+    font-size:15px; text-transform:uppercase; color:var(--bio); margin-bottom:18px;
+  }
+  .brand .dot{width:12px;height:12px;border-radius:50%;background:var(--bio);box-shadow:0 0 16px var(--bio)}
+  .hero h1{margin:0; font-size:30px; line-height:1.2; font-weight:800}
+  .hero .upd{margin:14px 0 0; color:#9FB3C8; font-size:14px}
+
+  /* Layout */
+  .wrap{max-width:760px; margin:-32px auto 0; padding:0 18px 80px; position:relative; z-index:1}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:18px;
+    padding:24px 22px; margin:18px 0; box-shadow:0 8px 30px rgba(16,32,56,.06);
+  }
+  .intro{font-size:17px; color:#334155}
+  h2{
+    font-size:21px; font-weight:800; margin:34px 0 12px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2::before{content:""; width:6px; height:22px; border-radius:4px; background:var(--green); display:inline-block}
+  h3{font-size:16px; font-weight:700; margin:18px 0 6px; color:var(--ink)}
+  p{margin:10px 0}
+  .muted{color:var(--muted)}
+
+  /* Summary checklist */
+  .check{list-style:none; padding:0; margin:8px 0}
+  .check li{position:relative; padding:8px 0 8px 34px; border-bottom:1px solid var(--line)}
+  .check li:last-child{border-bottom:0}
+  .check li::before{
+    content:"\2713"; position:absolute; left:0; top:7px; width:22px; height:22px;
+    background:rgba(34,197,94,.12); color:var(--green-d); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+  }
+  /* Negative list */
+  ul.dash{list-style:none; padding:0; margin:8px 0}
+  ul.dash li{position:relative; padding:6px 0 6px 26px}
+  ul.dash li::before{content:"\2013"; position:absolute; left:6px; color:var(--muted); font-weight:700}
+  ul.plain{padding-left:22px} ul.plain li{margin:6px 0}
+
+  /* Table */
+  .tablewrap{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:10px 0; border-radius:14px; border:1px solid var(--line)}
+  table{border-collapse:collapse; width:100%; min-width:520px; font-size:15px}
+  th,td{text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{background:#F1F5F9; font-weight:700; color:#334155; font-size:13px; text-transform:uppercase; letter-spacing:.4px}
+  tr:last-child td{border-bottom:0}
+  .pill{display:inline-block; font-size:12px; font-weight:700; padding:3px 10px; border-radius:999px}
+  .yes{background:rgba(34,197,94,.12); color:var(--green-d)}
+  .no{background:rgba(100,116,139,.12); color:var(--muted)}
+
+  .contact{background:linear-gradient(135deg,rgba(34,197,94,.08),rgba(0,229,160,.06)); border-color:rgba(34,197,94,.25)}
+  .mail{font-weight:700; font-size:17px}
+
+  footer{text-align:center; color:var(--muted); font-size:13px; padding:30px 18px 50px}
+  footer .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:7px;vertical-align:middle}
+
+  @media (max-width:520px){
+    .hero{padding:44px 18px 56px} .hero h1{font-size:25px}
+    body{font-size:16px} .card{padding:20px 18px}
+  }
 </style>
 </head>
 <body>
-<div id="contents"><style type="text/css">ul.lst-kix_dk126d8x4i3t-6{list-style-type:none}ul.lst-kix_dk126d8x4i3t-5{list-style-type:none}ul.lst-kix_dk126d8x4i3t-8{list-style-type:none}ul.lst-kix_dk126d8x4i3t-7{list-style-type:none}ul.lst-kix_r3tvcyraiqps-1{list-style-type:none}ul.lst-kix_r3tvcyraiqps-0{list-style-type:none}ul.lst-kix_r3tvcyraiqps-5{list-style-type:none}ul.lst-kix_r3tvcyraiqps-4{list-style-type:none}ul.lst-kix_r3tvcyraiqps-3{list-style-type:none}ul.lst-kix_r3tvcyraiqps-2{list-style-type:none}ul.lst-kix_dk126d8x4i3t-2{list-style-type:none}ul.lst-kix_dk126d8x4i3t-1{list-style-type:none}ul.lst-kix_r3tvcyraiqps-8{list-style-type:none}ul.lst-kix_dk126d8x4i3t-4{list-style-type:none}ul.lst-kix_r3tvcyraiqps-7{list-style-type:none}ul.lst-kix_dk126d8x4i3t-3{list-style-type:none}ul.lst-kix_r3tvcyraiqps-6{list-style-type:none}ul.lst-kix_dk126d8x4i3t-0{list-style-type:none}.lst-kix_d1uwq176vvnl-4>li:before{content:"\0025cb   "}ul.lst-kix_ukrqbaqpibjs-8{list-style-type:none}.lst-kix_grcr17a3kwjw-6>li:before{content:"\0025cf   "}.lst-kix_grcr17a3kwjw-7>li:before{content:"\0025cb   "}.lst-kix_d1uwq176vvnl-3>li:before{content:"\0025cf   "}ul.lst-kix_ukrqbaqpibjs-5{list-style-type:none}.lst-kix_y3cock9a4kcf-0>li:before{content:"\0025cf   "}ul.lst-kix_ukrqbaqpibjs-4{list-style-type:none}.lst-kix_grcr17a3kwjw-8>li:before{content:"\0025a0   "}.lst-kix_d1uwq176vvnl-2>li:before{content:"\0025a0   "}ul.lst-kix_ukrqbaqpibjs-7{list-style-type:none}ul.lst-kix_ukrqbaqpibjs-6{list-style-type:none}.lst-kix_d1uwq176vvnl-1>li:before{content:"\0025cb   "}ul.lst-kix_ukrqbaqpibjs-1{list-style-type:none}.lst-kix_y3cock9a4kcf-1>li:before{content:"\0025cb   "}.lst-kix_y3cock9a4kcf-2>li:before{content:"\0025a0   "}ul.lst-kix_ukrqbaqpibjs-0{list-style-type:none}ul.lst-kix_ukrqbaqpibjs-3{list-style-type:none}ul.lst-kix_ukrqbaqpibjs-2{list-style-type:none}.lst-kix_y3cock9a4kcf-3>li:before{content:"\0025cf   "}.lst-kix_d1uwq176vvnl-0>li:before{content:"\0025cf   "}.lst-kix_y3cock9a4kcf-5>li:before{content:"\0025a0   "}.lst-kix_y3cock9a4kcf-6>li:before{content:"\0025cf   "}.lst-kix_y3cock9a4kcf-4>li:before{content:"\0025cb   "}.lst-kix_y3cock9a4kcf-8>li:before{content:"\0025a0   "}.lst-kix_y3cock9a4kcf-7>li:before{content:"\0025cb   "}.lst-kix_dk126d8x4i3t-5>li:before{content:"\0025a0   "}.lst-kix_dk126d8x4i3t-6>li:before{content:"\0025cf   "}.lst-kix_dk126d8x4i3t-7>li:before{content:"\0025cb   "}.lst-kix_dk126d8x4i3t-3>li:before{content:"\0025cf   "}.lst-kix_r3tvcyraiqps-0>li:before{content:"\0025cf   "}.lst-kix_dk126d8x4i3t-1>li:before{content:"\0025cb   "}.lst-kix_dk126d8x4i3t-2>li:before{content:"\0025a0   "}.lst-kix_r3tvcyraiqps-1>li:before{content:"\0025cb   "}.lst-kix_dk126d8x4i3t-0>li:before{content:"\0025cf   "}.lst-kix_dk126d8x4i3t-8>li:before{content:"\0025a0   "}.lst-kix_r3tvcyraiqps-4>li:before{content:"\0025cb   "}.lst-kix_r3tvcyraiqps-3>li:before{content:"\0025cf   "}.lst-kix_r3tvcyraiqps-5>li:before{content:"\0025a0   "}.lst-kix_r3tvcyraiqps-2>li:before{content:"\0025a0   "}.lst-kix_r3tvcyraiqps-6>li:before{content:"\0025cf   "}ul.lst-kix_d1uwq176vvnl-7{list-style-type:none}.lst-kix_r3tvcyraiqps-8>li:before{content:"\0025a0   "}ul.lst-kix_d1uwq176vvnl-8{list-style-type:none}ul.lst-kix_d1uwq176vvnl-5{list-style-type:none}.lst-kix_r3tvcyraiqps-7>li:before{content:"\0025cb   "}ul.lst-kix_d1uwq176vvnl-6{list-style-type:none}ul.lst-kix_d1uwq176vvnl-0{list-style-type:none}ul.lst-kix_d1uwq176vvnl-3{list-style-type:none}ul.lst-kix_d1uwq176vvnl-4{list-style-type:none}ul.lst-kix_d1uwq176vvnl-1{list-style-type:none}ul.lst-kix_d1uwq176vvnl-2{list-style-type:none}.lst-kix_dk126d8x4i3t-4>li:before{content:"\0025cb   "}.lst-kix_ukrqbaqpibjs-1>li:before{content:"\0025cb   "}.lst-kix_ukrqbaqpibjs-0>li:before{content:"\0025cf   "}.lst-kix_ukrqbaqpibjs-5>li:before{content:"\0025a0   "}.lst-kix_ukrqbaqpibjs-2>li:before{content:"\0025a0   "}.lst-kix_ukrqbaqpibjs-6>li:before{content:"\0025cf   "}.lst-kix_ukrqbaqpibjs-3>li:before{content:"\0025cf   "}.lst-kix_ukrqbaqpibjs-4>li:before{content:"\0025cb   "}ul.lst-kix_xa4aw7o5suur-8{list-style-type:none}ul.lst-kix_xa4aw7o5suur-6{list-style-type:none}ul.lst-kix_xa4aw7o5suur-7{list-style-type:none}.lst-kix_ukrqbaqpibjs-7>li:before{content:"\0025cb   "}.lst-kix_ukrqbaqpibjs-8>li:before{content:"\0025a0   "}.lst-kix_xa4aw7o5suur-1>li:before{content:"\0025cb   "}.lst-kix_xa4aw7o5suur-0>li:before{content:"\0025cf   "}.lst-kix_xa4aw7o5suur-2>li:before{content:"\0025a0   "}ul.lst-kix_y3cock9a4kcf-3{list-style-type:none}.lst-kix_xa4aw7o5suur-5>li:before{content:"\0025a0   "}ul.lst-kix_y3cock9a4kcf-4{list-style-type:none}ul.lst-kix_y3cock9a4kcf-1{list-style-type:none}.lst-kix_xa4aw7o5suur-6>li:before{content:"\0025cf   "}ul.lst-kix_y3cock9a4kcf-2{list-style-type:none}ul.lst-kix_y3cock9a4kcf-7{list-style-type:none}.lst-kix_xa4aw7o5suur-7>li:before{content:"\0025cb   "}ul.lst-kix_y3cock9a4kcf-8{list-style-type:none}ul.lst-kix_y3cock9a4kcf-5{list-style-type:none}ul.lst-kix_y3cock9a4kcf-6{list-style-type:none}ul.lst-kix_y3cock9a4kcf-0{list-style-type:none}ul.lst-kix_xa4aw7o5suur-0{list-style-type:none}ul.lst-kix_xa4aw7o5suur-1{list-style-type:none}.lst-kix_xa4aw7o5suur-4>li:before{content:"\0025cb   "}.lst-kix_xa4aw7o5suur-3>li:before{content:"\0025cf   "}ul.lst-kix_xa4aw7o5suur-4{list-style-type:none}ul.lst-kix_xa4aw7o5suur-5{list-style-type:none}.lst-kix_grcr17a3kwjw-5>li:before{content:"\0025a0   "}ul.lst-kix_xa4aw7o5suur-2{list-style-type:none}ul.lst-kix_xa4aw7o5suur-3{list-style-type:none}.lst-kix_d1uwq176vvnl-5>li:before{content:"\0025a0   "}.lst-kix_d1uwq176vvnl-7>li:before{content:"\0025cb   "}.lst-kix_grcr17a3kwjw-4>li:before{content:"\0025cb   "}.lst-kix_d1uwq176vvnl-6>li:before{content:"\0025cf   "}ul.lst-kix_grcr17a3kwjw-5{list-style-type:none}.lst-kix_grcr17a3kwjw-2>li:before{content:"\0025a0   "}.lst-kix_grcr17a3kwjw-3>li:before{content:"\0025cf   "}ul.lst-kix_grcr17a3kwjw-4{list-style-type:none}ul.lst-kix_grcr17a3kwjw-3{list-style-type:none}ul.lst-kix_grcr17a3kwjw-2{list-style-type:none}.lst-kix_grcr17a3kwjw-1>li:before{content:"\0025cb   "}ul.lst-kix_grcr17a3kwjw-1{list-style-type:none}ul.lst-kix_grcr17a3kwjw-0{list-style-type:none}li.li-bullet-0:before{margin-left:-18pt;white-space:nowrap;display:inline-block;min-width:18pt}.lst-kix_d1uwq176vvnl-8>li:before{content:"\0025a0   "}.lst-kix_xa4aw7o5suur-8>li:before{content:"\0025a0   "}ul.lst-kix_grcr17a3kwjw-8{list-style-type:none}.lst-kix_grcr17a3kwjw-0>li:before{content:"\0025cf   "}ul.lst-kix_grcr17a3kwjw-7{list-style-type:none}ul.lst-kix_grcr17a3kwjw-6{list-style-type:none}ol{margin:0;padding:0}table td,table th{padding:0}.c3{border-right-style:solid;padding:5pt 5pt 5pt 5pt;border-bottom-color:#000000;border-top-width:0pt;border-right-width:0pt;border-left-color:#000000;vertical-align:top;border-right-color:#000000;border-left-width:0pt;border-top-style:solid;border-left-style:solid;border-bottom-width:0pt;width:159.6pt;border-top-color:#000000;border-bottom-style:solid}.c12{border-right-style:solid;padding:5pt 5pt 5pt 5pt;border-bottom-color:#000000;border-top-width:0pt;border-right-width:0pt;border-left-color:#000000;vertical-align:top;border-right-color:#000000;border-left-width:0pt;border-top-style:solid;border-left-style:solid;border-bottom-width:0pt;width:223.7pt;border-top-color:#000000;border-bottom-style:solid}.c18{border-right-style:solid;padding:5pt 5pt 5pt 5pt;border-bottom-color:#000000;border-top-width:0pt;border-right-width:0pt;border-left-color:#000000;vertical-align:top;border-right-color:#000000;border-left-width:0pt;border-top-style:solid;border-left-style:solid;border-bottom-width:0pt;width:68pt;border-top-color:#000000;border-bottom-style:solid}.c2{margin-left:36pt;padding-top:12pt;padding-left:0pt;padding-bottom:12pt;line-height:1.15;orphans:2;widows:2;text-align:left}.c1{color:#000000;font-weight:700;text-decoration:none;vertical-align:baseline;font-size:23pt;font-family:"Arial";font-style:normal}.c0{color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:11pt;font-family:"Arial";font-style:normal}.c13{color:#000000;text-decoration:none;vertical-align:baseline;font-size:13pt;font-family:"Arial";font-style:normal}.c11{padding-top:14pt;padding-bottom:4pt;line-height:1.15;orphans:2;widows:2;text-align:left}.c5{padding-top:0pt;padding-bottom:0pt;line-height:1.15;orphans:2;widows:2;text-align:left}.c9{color:#000000;text-decoration:none;vertical-align:baseline;font-size:11pt;font-family:"Arial";font-style:normal}.c8{padding-top:12pt;padding-bottom:12pt;line-height:1.15;orphans:2;widows:2;text-align:left}.c19{padding-top:0pt;padding-bottom:0pt;line-height:1.15;orphans:2;widows:2;text-align:center}.c7{padding-top:24pt;padding-bottom:6pt;line-height:1.15;orphans:2;widows:2;text-align:left}.c14{border-spacing:0;border-collapse:collapse;margin-right:auto}.c10{background-color:#ffffff;max-width:451.4pt;padding:72pt 72pt 72pt 72pt}.c17{padding:0;margin:0}.c15{height:25pt}.c16{height:38.5pt}.c4{font-weight:700}.c6{height:11pt}.title{padding-top:0pt;color:#000000;font-size:26pt;padding-bottom:3pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}.subtitle{padding-top:0pt;color:#666666;font-size:15pt;padding-bottom:16pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}li{color:#000000;font-size:11pt;font-family:"Arial"}p{margin:0;color:#000000;font-size:11pt;font-family:"Arial"}h1{padding-top:20pt;color:#000000;font-size:20pt;padding-bottom:6pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h2{padding-top:18pt;color:#000000;font-size:16pt;padding-bottom:6pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h3{padding-top:16pt;color:#434343;font-size:14pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h4{padding-top:14pt;color:#666666;font-size:12pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h5{padding-top:12pt;color:#666666;font-size:11pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h6{padding-top:12pt;color:#666666;font-size:11pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;font-style:italic;orphans:2;widows:2;text-align:left}</style><div class="c10 doc-content"><h1 class="c7" id="h.v3hz1mmtcsbs"><span class="c1">Política de Privacidad de Ripple</span></h1><p class="c8"><span class="c9 c4">Última actualización: 15 de junio de 2026</span></p><p class="c8"><span class="c0">En Ripple creemos que construir buenos hábitos no debería significar renunciar a tu privacidad. Esta política explica de forma clara qué información utilizamos, por qué la utilizamos y qué control tienes sobre ella.</span></p><p class="c8"><span class="c0">Si tienes cualquier duda, puedes escribirnos a:</span></p><p class="c8"><span class="c9 c4">rippleappsupport@gmail.com</span></p><hr><p class="c5 c6"><span class="c0"></span></p><h1 class="c7" id="h.j241jixm2p9c"><span class="c1">Resumen rápido</span></h1><ul class="c17 lst-kix_d1uwq176vvnl-0 start"><li class="c2 li-bullet-0"><span class="c0">Solo recopilamos la información necesaria para que la aplicación funcione.</span></li><li class="c2 li-bullet-0"><span class="c0">Tus hábitos y progreso son tuyos.</span></li><li class="c2 li-bullet-0"><span class="c0">Nunca vendemos tus datos personales.</span></li><li class="c2 li-bullet-0"><span class="c0">No utilizamos tu información para publicidad personalizada.</span></li><li class="c2 li-bullet-0"><span class="c0">Puedes solicitar la eliminación de tu cuenta y de tus datos en cualquier momento.</span></li></ul><hr><p class="c5 c6"><span class="c0"></span></p><h1 class="c7" id="h.mcctff879yd6"><span class="c1">Qué información recopilamos</span></h1><table class="c14"><tr class="c15"><td class="c3" colspan="1" rowspan="1"><p class="c19"><span class="c4">Información</span></p></td><td class="c12" colspan="1" rowspan="1"><p class="c19"><span class="c4">Finalidad</span></p></td><td class="c18" colspan="1" rowspan="1"><p class="c19"><span class="c4">Obligatoria</span></p></td></tr><tr class="c15"><td class="c3" colspan="1" rowspan="1"><p class="c5"><span class="c0">Correo electrónico</span></p></td><td class="c12" colspan="1" rowspan="1"><p class="c5"><span class="c0">Crear y mantener tu cuenta</span></p></td><td class="c18" colspan="1" rowspan="1"><p class="c5"><span class="c0">Sí</span></p></td></tr><tr class="c15"><td class="c3" colspan="1" rowspan="1"><p class="c5"><span class="c0">Nombre o nombre de perfil</span></p></td><td class="c12" colspan="1" rowspan="1"><p class="c5"><span class="c0">Personalizar tu experiencia</span></p></td><td class="c18" colspan="1" rowspan="1"><p class="c5"><span class="c0">Sí</span></p></td></tr><tr class="c16"><td class="c3" colspan="1" rowspan="1"><p class="c5"><span class="c0">País (opcional)</span></p></td><td class="c12" colspan="1" rowspan="1"><p class="c5"><span class="c0">Estadísticas generales de la comunidad y personalización básica de la experiencia</span></p></td><td class="c18" colspan="1" rowspan="1"><p class="c5"><span class="c0">No</span></p></td></tr><tr class="c16"><td class="c3" colspan="1" rowspan="1"><p class="c5"><span class="c0">Hábitos, check-ins, rachas, niveles, logros y progreso</span></p></td><td class="c12" colspan="1" rowspan="1"><p class="c5"><span class="c0">Mostrar y guardar tu evolución dentro de la aplicación</span></p></td><td class="c18" colspan="1" rowspan="1"><p class="c5"><span class="c0">Sí</span></p></td></tr><tr class="c15"><td class="c3" colspan="1" rowspan="1"><p class="c5"><span class="c0">Token de notificaciones</span></p></td><td class="c12" colspan="1" rowspan="1"><p class="c5"><span class="c0">Enviarte recordatorios si decides activarlos</span></p></td><td class="c18" colspan="1" rowspan="1"><p class="c5"><span class="c0">No</span></p></td></tr></table><hr><p class="c5 c6"><span class="c0"></span></p><h1 class="c7" id="h.dun4ibekt3tn"><span class="c1">Información que NO recopilamos</span></h1><p class="c8"><span class="c0">Ripple no recopila ni almacena:</span></p><ul class="c17 lst-kix_ukrqbaqpibjs-0 start"><li class="c2 li-bullet-0"><span class="c0">Tu ubicación GPS.</span></li><li class="c2 li-bullet-0"><span class="c0">Tus contactos.</span></li><li class="c2 li-bullet-0"><span class="c0">Tus fotografías.</span></li><li class="c2 li-bullet-0"><span class="c0">Tu micrófono.</span></li><li class="c2 li-bullet-0"><span class="c0">Tu cámara para funcionamiento normal de la aplicación.</span></li><li class="c2 li-bullet-0"><span class="c0">Información financiera.</span></li><li class="c2 li-bullet-0"><span class="c0">Datos médicos o de salud sensibles.</span></li><li class="c2 li-bullet-0"><span class="c0">Mensajes privados externos al funcionamiento de la aplicación.</span></li></ul><hr><p class="c5 c6"><span class="c0"></span></p><h1 class="c7" id="h.z675zwn9cy72"><span class="c1">Biometría (Huella y Face ID)</span></h1><p class="c8"><span class="c0">Si decides utilizar autenticación biométrica, tus datos biométricos nunca se almacenan en nuestros servidores.</span></p><p class="c8"><span class="c0">La validación es gestionada completamente por el sistema operativo de tu dispositivo.</span></p><p class="c8"><span class="c0">Ripple únicamente recibe una confirmación segura indicando que la autenticación fue correcta.</span></p><p class="c8"><span class="c0">Nunca tenemos acceso a tu huella, rostro o información biométrica real.</span></p><hr><p class="c5 c6"><span class="c0"></span></p><h1 class="c7" id="h.6gmeqj9ypqtw"><span class="c1">Para qué utilizamos tus datos</span></h1><p class="c8"><span class="c0">Utilizamos la información únicamente para:</span></p><ul class="c17 lst-kix_xa4aw7o5suur-0 start"><li class="c2 li-bullet-0"><span class="c0">Crear y administrar tu cuenta.</span></li><li class="c2 li-bullet-0"><span class="c0">Guardar tu progreso y sincronizarlo entre dispositivos.</span></li><li class="c2 li-bullet-0"><span class="c0">Mostrar estadísticas y evolución personal.</span></li><li class="c2 li-bullet-0"><span class="c0">Mantener tus rachas, niveles y logros.</span></li><li class="c2 li-bullet-0"><span class="c0">Enviar recordatorios si los has activado.</span></li><li class="c2 li-bullet-0"><span class="c0">Mejorar el funcionamiento, estabilidad y seguridad de la aplicación.</span></li><li class="c2 li-bullet-0"><span class="c0">Cumplir con obligaciones legales cuando sea necesario.</span></li></ul><p class="c8"><span class="c0">No utilizamos tus datos para vender perfiles comerciales ni para publicidad personalizada.</span></p><hr><p class="c5 c6"><span class="c0"></span></p><h1 class="c7" id="h.geryc3dgbrt1"><span class="c1">Base legal del tratamiento</span></h1><p class="c8"><span class="c0">Tratamos tu información con base en:</span></p><ul class="c17 lst-kix_grcr17a3kwjw-0 start"><li class="c2 li-bullet-0"><span class="c0">La ejecución del servicio solicitado por el usuario.</span></li><li class="c2 li-bullet-0"><span class="c0">Tu consentimiento, cuando activas funciones opcionales como las notificaciones.</span></li><li class="c2 li-bullet-0"><span class="c0">Nuestro interés legítimo en mantener la seguridad y estabilidad de la aplicación.</span></li><li class="c2 li-bullet-0"><span class="c0">El cumplimiento de obligaciones legales aplicables.</span></li></ul><hr><p class="c5 c6"><span class="c0"></span></p><h1 class="c7" id="h.kc3qbtovc757"><span class="c1">Permisos del dispositivo</span></h1><p class="c8"><span class="c0">Ripple puede solicitar los siguientes permisos:</span></p><h3 class="c11" id="h.syhwjwe07mpi"><span class="c13 c4">Notificaciones</span></h3><p class="c8"><span class="c0">Para enviarte recordatorios relacionados con tus hábitos si decides activarlos.</span></p><p class="c8"><span class="c9 c4">Alarmas y recordatorios exactos</span></p><p class="c8"><span class="c0">Ripple puede solicitar permiso para programar recordatorios exactos en Android. Este permiso se utiliza únicamente para enviar recordatorios de hábitos en el horario que el usuario elige dentro de la aplicación.</span></p><p class="c8"><span class="c0">Ripple no utiliza este permiso para mostrar publicidad, rastrear actividad del usuario ni ejecutar funciones no relacionadas con los recordatorios de hábitos. El usuario puede desactivar los recordatorios desde la configuración de la aplicación o desde la configuración del dispositivo.</span></p><p class="c8 c6"><span class="c0"></span></p><h3 class="c11" id="h.54gp3i33f58f"><span class="c4 c13">Autenticación biométrica</span></h3><p class="c8"><span class="c0">Para permitir el acceso seguro mediante huella digital o Face ID.</span></p><p class="c8"><span class="c0">Ripple no solicita permisos de ubicación, contactos, cámara o micrófono para su funcionamiento normal.</span></p><hr><p class="c5 c6"><span class="c0"></span></p><h1 class="c7" id="h.de2eq72x36yl"><span class="c1">Con quién compartimos la información</span></h1><p class="c8"><span class="c0">Para ofrecer el servicio utilizamos proveedores tecnológicos de confianza que procesan datos únicamente para prestar sus servicios.</span></p><p class="c8"><span class="c0">Actualmente trabajamos con:</span></p><ul class="c17 lst-kix_y3cock9a4kcf-0 start"><li class="c2 li-bullet-0"><span class="c4">Supabase</span><span class="c0">: almacenamiento seguro de cuentas y progreso.</span></li><li class="c2 li-bullet-0"><span class="c4">Google</span><span class="c0">: autenticación mediante &quot;Entrar con Google&quot; si el usuario decide utilizarla.</span></li><li class="c2 li-bullet-0"><span class="c4">Expo</span><span class="c0">: entrega de notificaciones push.</span></li></ul><p class="c8"><span class="c0">Estos proveedores no reciben autorización para utilizar tus datos con fines propios distintos a la prestación del servicio.</span></p><hr><p class="c5 c6"><span class="c0"></span></p><h1 class="c7" id="h.dxlpnrkixwto"><span class="c1">Dónde se almacenan los datos</span></h1><p class="c8"><span class="c0">La información puede almacenarse y procesarse en servidores proporcionados por nuestros proveedores tecnológicos, los cuales pueden encontrarse en distintos países.</span></p><p class="c8"><span class="c0">Trabajamos para que el tratamiento de los datos se realice utilizando medidas razonables de seguridad y protección.</span></p><hr><p class="c5 c6"><span class="c0"></span></p><h1 class="c7" id="h.f31t5tmppq87"><span class="c1">Seguridad de la información</span></h1><p class="c8"><span class="c0">Tomamos medidas técnicas y organizativas para proteger tu información, incluyendo:</span></p><ul class="c17 lst-kix_dk126d8x4i3t-0 start"><li class="c2 li-bullet-0"><span class="c0">Comunicación cifrada entre la aplicación y los servidores.</span></li><li class="c2 li-bullet-0"><span class="c0">Controles de acceso para que cada usuario solo pueda acceder a su propia información.</span></li><li class="c2 li-bullet-0"><span class="c0">Protección de las credenciales de autenticación.</span></li><li class="c2 li-bullet-0"><span class="c0">Actualización y mantenimiento continuo de nuestros sistemas.</span></li></ul><p class="c8"><span class="c0">Aunque ningún sistema puede garantizar una seguridad absoluta, trabajamos para reducir los riesgos al máximo razonable.</span></p><hr><p class="c5 c6"><span class="c0"></span></p><h1 class="c7" id="h.wuydi9fjerzq"><span class="c1">Conservación de los datos</span></h1><p class="c8"><span class="c0">Conservaremos tu información mientras tu cuenta permanezca activa y sea necesaria para prestar el servicio.</span></p><p class="c8"><span class="c0">Si solicitas la eliminación de tu cuenta, eliminaremos o anonimizaremos los datos asociados, salvo aquellos que debamos conservar por obligación legal.</span></p><hr><p class="c5 c6"><span class="c0"></span></p><h1 class="c7" id="h.klrubtktkojy"><span class="c1">Tus derechos</span></h1><p class="c8"><span class="c0">Puedes solicitar en cualquier momento:</span></p><ul class="c17 lst-kix_r3tvcyraiqps-0 start"><li class="c2 li-bullet-0"><span class="c0">Acceder a la información que tenemos sobre ti.</span></li><li class="c2 li-bullet-0"><span class="c0">Corregir datos incorrectos o desactualizados.</span></li><li class="c2 li-bullet-0"><span class="c0">Eliminar tu cuenta y los datos asociados.</span></li><li class="c2 li-bullet-0"><span class="c0">Dejar de recibir notificaciones.</span></li><li class="c2 li-bullet-0"><span class="c0">Realizar consultas relacionadas con el tratamiento de tu información.</span></li></ul><p class="c8"><span class="c0">Para ello puedes escribirnos a:</span></p><p class="c8"><span class="c4 c9">rippleappsupport@gmail.com</span></p><p class="c8"><span class="c0">Intentaremos responder y procesar las solicitudes lo antes posible y, normalmente, en un plazo máximo de 30 días.</span></p><hr><p class="c5 c6"><span class="c0"></span></p><h1 class="c7" id="h.d146pdasijrh"><span class="c1">Eliminación de la cuenta</span></h1><p class="c8"><span class="c0">Puedes solicitar la eliminación permanente de tu cuenta y de los datos asociados enviando un correo a:</span></p><p class="c8"><span class="c9 c4">rippleappsupport@gmail.com</span></p><p class="c8"><span class="c0">Una vez procesada la solicitud, tu progreso y la información asociada serán eliminados o anonimizados, salvo cuando exista una obligación legal de conservación.</span></p><hr><p class="c5 c6"><span class="c0"></span></p><h1 class="c7" id="h.2c5bumtiyvi7"><span class="c1">Menores de edad</span></h1><p class="c8"><span class="c0">Ripple está dirigida a personas mayores de 13 años.</span></p><p class="c8"><span class="c0">No recopilamos conscientemente información personal de menores de esa edad. Si descubrimos que se ha registrado una persona menor de 13 años, tomaremos medidas razonables para eliminar esa información.</span></p><hr><p class="c5 c6"><span class="c0"></span></p><h1 class="c7" id="h.bvl50w5lm3rb"><span class="c1">Cambios en esta política</span></h1><p class="c8"><span class="c0">Podemos actualizar esta Política de Privacidad cuando sea necesario para reflejar mejoras en la aplicación, cambios legales o nuevos servicios.</span></p><p class="c8"><span class="c0">Cuando esto ocurra, publicaremos la versión actualizada indicando la fecha de la última modificación.</span></p><hr><p class="c5 c6"><span class="c0"></span></p><h1 class="c7" id="h.pkghqb26yywk"><span class="c1">Contacto</span></h1><p class="c8"><span class="c0">Si tienes preguntas, comentarios o inquietudes relacionadas con la privacidad o el tratamiento de tus datos, puedes comunicarte con nosotros en:</span></p><p class="c8"><span class="c9 c4">rippleappsupport@gmail.com</span></p><hr><p class="c5 c6"><span class="c0"></span></p><p class="c8"><span class="c9 c4">En Ripple creemos que los hábitos construyen una mejor versión de las personas, y que la confianza se construye protegiendo su privacidad.</span></p><p class="c5 c6"><span class="c0"></span></p></div></div>
+  <header class="hero">
+    <div class="brand"><span class="dot"></span> Ripple</div>
+    <h1>Política de Privacidad</h1>
+    <p class="upd">Última actualización: 15 de junio de 2026</p>
+  </header>
+
+  <main class="wrap">
+    <div class="card">
+      <p class="intro">En Ripple creemos que construir buenos hábitos no debería significar renunciar a tu privacidad. Esta política explica de forma clara <strong>qué información utilizamos, por qué la utilizamos y qué control tienes sobre ella.</strong></p>
+      <p class="muted">¿Dudas? Escríbenos a <a href="mailto:rippleappsupport@gmail.com">rippleappsupport@gmail.com</a></p>
+    </div>
+
+    <h2>Resumen rápido</h2>
+    <div class="card">
+      <ul class="check">
+        <li>Solo recopilamos la información necesaria para que la aplicación funcione.</li>
+        <li>Tus hábitos y progreso son tuyos.</li>
+        <li>Nunca vendemos tus datos personales.</li>
+        <li>No utilizamos tu información para publicidad personalizada.</li>
+        <li>Puedes solicitar la eliminación de tu cuenta y de tus datos en cualquier momento.</li>
+      </ul>
+    </div>
+
+    <h2>Qué información recopilamos</h2>
+    <div class="card">
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Información</th><th>Finalidad</th><th>Obligatoria</th></tr></thead>
+          <tbody>
+            <tr><td>Correo electrónico</td><td>Crear y mantener tu cuenta</td><td><span class="pill yes">Sí</span></td></tr>
+            <tr><td>Nombre o nombre de perfil</td><td>Personalizar tu experiencia</td><td><span class="pill yes">Sí</span></td></tr>
+            <tr><td>País (opcional)</td><td>Estadísticas generales de la comunidad y personalización básica</td><td><span class="pill no">No</span></td></tr>
+            <tr><td>Hábitos, check-ins, rachas, niveles, logros y progreso</td><td>Mostrar y guardar tu evolución dentro de la aplicación</td><td><span class="pill yes">Sí</span></td></tr>
+            <tr><td>Token de notificaciones</td><td>Enviarte recordatorios si decides activarlos</td><td><span class="pill no">No</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h2>Información que NO recopilamos</h2>
+    <div class="card">
+      <p>Ripple no recopila ni almacena:</p>
+      <ul class="dash">
+        <li>Tu ubicación GPS.</li>
+        <li>Tus contactos.</li>
+        <li>Tus fotografías.</li>
+        <li>Tu micrófono.</li>
+        <li>Tu cámara para el funcionamiento normal de la aplicación.</li>
+        <li>Información financiera.</li>
+        <li>Datos médicos o de salud sensibles.</li>
+        <li>Mensajes privados externos al funcionamiento de la aplicación.</li>
+      </ul>
+    </div>
+
+    <h2>Biometría (Huella y Face ID)</h2>
+    <div class="card">
+      <p>Si decides utilizar autenticación biométrica, <strong>tus datos biométricos nunca se almacenan en nuestros servidores.</strong></p>
+      <p>La validación es gestionada completamente por el sistema operativo de tu dispositivo. Ripple únicamente recibe una confirmación segura indicando que la autenticación fue correcta.</p>
+      <p>Nunca tenemos acceso a tu huella, rostro o información biométrica real.</p>
+    </div>
+
+    <h2>Para qué utilizamos tus datos</h2>
+    <div class="card">
+      <p>Utilizamos la información únicamente para:</p>
+      <ul class="plain">
+        <li>Crear y administrar tu cuenta.</li>
+        <li>Guardar tu progreso y sincronizarlo entre dispositivos.</li>
+        <li>Mostrar estadísticas y evolución personal.</li>
+        <li>Mantener tus rachas, niveles y logros.</li>
+        <li>Enviar recordatorios si los has activado.</li>
+        <li>Mejorar el funcionamiento, estabilidad y seguridad de la aplicación.</li>
+        <li>Cumplir con obligaciones legales cuando sea necesario.</li>
+      </ul>
+      <p>No utilizamos tus datos para vender perfiles comerciales ni para publicidad personalizada.</p>
+    </div>
+
+    <h2>Base legal del tratamiento</h2>
+    <div class="card">
+      <p>Tratamos tu información con base en:</p>
+      <ul class="plain">
+        <li>La ejecución del servicio solicitado por el usuario.</li>
+        <li>Tu consentimiento, cuando activas funciones opcionales como las notificaciones.</li>
+        <li>Nuestro interés legítimo en mantener la seguridad y estabilidad de la aplicación.</li>
+        <li>El cumplimiento de obligaciones legales aplicables.</li>
+      </ul>
+    </div>
+
+    <h2>Permisos del dispositivo</h2>
+    <div class="card">
+      <h3>Notificaciones</h3>
+      <p>Para enviarte recordatorios relacionados con tus hábitos si decides activarlos.</p>
+      <h3>Alarmas y recordatorios exactos</h3>
+      <p>Ripple puede solicitar permiso para programar recordatorios exactos en Android. Este permiso se utiliza únicamente para enviar recordatorios de hábitos en el horario que el usuario elige dentro de la aplicación.</p>
+      <p>Ripple no utiliza este permiso para mostrar publicidad, rastrear actividad del usuario ni ejecutar funciones no relacionadas con los recordatorios de hábitos. El usuario puede desactivar los recordatorios desde la configuración de la aplicación o del dispositivo.</p>
+      <h3>Autenticación biométrica</h3>
+      <p>Para permitir el acceso seguro mediante huella digital o Face ID.</p>
+      <p class="muted">Ripple no solicita permisos de ubicación, contactos, cámara o micrófono para su funcionamiento normal.</p>
+    </div>
+
+    <h2>Con quién compartimos la información</h2>
+    <div class="card">
+      <p>Para ofrecer el servicio utilizamos proveedores tecnológicos de confianza que procesan datos únicamente para prestar sus servicios. Actualmente trabajamos con:</p>
+      <ul class="plain">
+        <li><strong>Supabase</strong> — almacenamiento seguro de cuentas y progreso.</li>
+        <li><strong>Google</strong> — autenticación mediante "Entrar con Google" si el usuario decide utilizarla.</li>
+        <li><strong>Expo</strong> — entrega de notificaciones push.</li>
+      </ul>
+      <p>Estos proveedores no reciben autorización para utilizar tus datos con fines propios distintos a la prestación del servicio.</p>
+    </div>
+
+    <h2>Dónde se almacenan los datos</h2>
+    <div class="card">
+      <p>La información puede almacenarse y procesarse en servidores proporcionados por nuestros proveedores tecnológicos, los cuales pueden encontrarse en distintos países.</p>
+      <p>Trabajamos para que el tratamiento de los datos se realice utilizando medidas razonables de seguridad y protección.</p>
+    </div>
+
+    <h2>Seguridad de la información</h2>
+    <div class="card">
+      <p>Tomamos medidas técnicas y organizativas para proteger tu información, incluyendo:</p>
+      <ul class="plain">
+        <li>Comunicación cifrada entre la aplicación y los servidores.</li>
+        <li>Controles de acceso para que cada usuario solo pueda acceder a su propia información.</li>
+        <li>Protección de las credenciales de autenticación.</li>
+        <li>Actualización y mantenimiento continuo de nuestros sistemas.</li>
+      </ul>
+      <p>Aunque ningún sistema puede garantizar una seguridad absoluta, trabajamos para reducir los riesgos al máximo razonable.</p>
+    </div>
+
+    <h2>Conservación de los datos</h2>
+    <div class="card">
+      <p>Conservaremos tu información mientras tu cuenta permanezca activa y sea necesaria para prestar el servicio.</p>
+      <p>Si solicitas la eliminación de tu cuenta, eliminaremos o anonimizaremos los datos asociados, salvo aquellos que debamos conservar por obligación legal.</p>
+    </div>
+
+    <h2>Tus derechos</h2>
+    <div class="card">
+      <p>Puedes solicitar en cualquier momento:</p>
+      <ul class="plain">
+        <li>Acceder a la información que tenemos sobre ti.</li>
+        <li>Corregir datos incorrectos o desactualizados.</li>
+        <li>Eliminar tu cuenta y los datos asociados.</li>
+        <li>Dejar de recibir notificaciones.</li>
+        <li>Realizar consultas relacionadas con el tratamiento de tu información.</li>
+      </ul>
+      <p>Para ello puedes escribirnos a <a href="mailto:rippleappsupport@gmail.com">rippleappsupport@gmail.com</a>. Intentaremos responder y procesar las solicitudes lo antes posible y, normalmente, en un plazo máximo de 30 días.</p>
+    </div>
+
+    <h2>Eliminación de la cuenta</h2>
+    <div class="card">
+      <p>Puedes solicitar la eliminación permanente de tu cuenta y de los datos asociados enviando un correo a <a href="mailto:rippleappsupport@gmail.com">rippleappsupport@gmail.com</a>.</p>
+      <p>Una vez procesada la solicitud, tu progreso y la información asociada serán eliminados o anonimizados, salvo cuando exista una obligación legal de conservación.</p>
+    </div>
+
+    <h2>Menores de edad</h2>
+    <div class="card">
+      <p>Ripple está dirigida a personas mayores de 13 años. No recopilamos conscientemente información personal de menores de esa edad. Si descubrimos que se ha registrado una persona menor de 13 años, tomaremos medidas razonables para eliminar esa información.</p>
+    </div>
+
+    <h2>Cambios en esta política</h2>
+    <div class="card">
+      <p>Podemos actualizar esta Política de Privacidad cuando sea necesario para reflejar mejoras en la aplicación, cambios legales o nuevos servicios. Cuando esto ocurra, publicaremos la versión actualizada indicando la fecha de la última modificación.</p>
+    </div>
+
+    <h2>Contacto</h2>
+    <div class="card contact">
+      <p>Si tienes preguntas, comentarios o inquietudes relacionadas con la privacidad o el tratamiento de tus datos, puedes comunicarte con nosotros en:</p>
+      <p class="mail"><a href="mailto:rippleappsupport@gmail.com">rippleappsupport@gmail.com</a></p>
+    </div>
+  </main>
+
+  <footer>
+    <span class="dot"></span> Ripple · Construye buenos hábitos, cuida tu privacidad.
+  </footer>
 </body>
 </html>
