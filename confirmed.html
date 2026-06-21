@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<!-- Seguridad: no filtrar la URL (con posible ?code=) por Referer y sin recursos externos -->
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<title>Confirmación · Ripple</title>
+<style>
+  :root{
+    --green:#22C55E; --green-d:#16A34A; --bio:#00E5A0;
+    --ocean:#060E1A; --ink:#111827; --muted:#64748B; --line:#E5EAF2;
+    --bg:#F8FAFF; --card:#FFFFFF; --amber:#F59E0B; --red:#EF4444;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; min-height:100vh; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.6; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:24px;
+  }
+  .brand{
+    display:inline-flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.5px;
+    font-size:14px; text-transform:uppercase; color:var(--green-d); margin-bottom:24px;
+  }
+  .brand .dot{width:12px;height:12px;border-radius:50%;background:var(--bio);box-shadow:0 0 16px var(--bio)}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:22px;
+    padding:34px 26px; max-width:420px; width:100%; text-align:center;
+    box-shadow:0 14px 44px rgba(16,32,56,.10);
+  }
+  .icon{
+    width:78px; height:78px; border-radius:50%; margin:0 auto 18px;
+    display:flex; align-items:center; justify-content:center; font-size:40px;
+    background:rgba(34,197,94,.12);
+  }
+  .icon.err{background:rgba(239,68,68,.12)}
+  h1{font-size:23px; font-weight:800; margin:0 0 10px}
+  p{font-size:16px; color:#475569; margin:0 0 22px}
+  .btn{
+    display:inline-block; background:var(--green); color:#fff; font-weight:800; font-size:16px;
+    padding:14px 30px; border-radius:14px; text-decoration:none; box-shadow:0 8px 22px rgba(34,197,94,.32);
+  }
+  .btn:active{transform:scale(.98)}
+  .langs{
+    display:inline-flex; gap:6px; margin-top:26px; background:#EEF2F8;
+    border:1px solid var(--line); border-radius:999px; padding:4px;
+  }
+  .langs button{
+    appearance:none; border:0; background:transparent; color:var(--muted); cursor:pointer;
+    font-weight:700; font-size:13px; letter-spacing:.5px; padding:6px 14px; border-radius:999px;
+  }
+  .langs button.active{background:var(--green); color:#fff}
+</style>
+</head>
+<body>
+  <div class="brand"><span class="dot"></span> Ripple</div>
+  <div class="card">
+    <div class="icon" id="icon">✅</div>
+    <h1 id="title"></h1>
+    <p id="msg"></p>
+    <a class="btn" id="cta" href="ripple://"></a>
+    <div class="langs" id="langs">
+      <button data-lang="es">ES</button>
+      <button data-lang="en">EN</button>
+      <button data-lang="pt">PT</button>
+    </div>
+  </div>
+
+<script>
+// La confirmación ya ocurrió en el endpoint de Supabase. Esta página es solo
+// informativa: NO procesa el token. Detecta únicamente si hubo error en el enlace.
+var hasError = /[?#&]error/i.test(location.search + location.hash);
+
+// Limpiar la URL (quita ?code / #access_token / ?error) para no exponerla ni dejarla en el historial.
+try { history.replaceState({}, "", location.pathname); } catch (e) {}
+
+var I18N = {
+  es: {
+    htmlLang: "es", docTitle: "Confirmación · Ripple",
+    ok:  { title: "¡Correo confirmado!", msg: "Tu cuenta quedó verificada. Vuelve a Ripple e inicia sesión para empezar." },
+    err: { title: "Enlace no válido", msg: "Este enlace expiró o ya fue usado. Abre Ripple e intenta registrarte de nuevo para recibir uno nuevo." },
+    cta: "Abrir Ripple"
+  },
+  en: {
+    htmlLang: "en", docTitle: "Confirmation · Ripple",
+    ok:  { title: "Email confirmed!", msg: "Your account is verified. Go back to Ripple and sign in to get started." },
+    err: { title: "Invalid link", msg: "This link has expired or was already used. Open Ripple and try signing up again to get a new one." },
+    cta: "Open Ripple"
+  },
+  pt: {
+    htmlLang: "pt", docTitle: "Confirmação · Ripple",
+    ok:  { title: "E-mail confirmado!", msg: "Sua conta foi verificada. Volte ao Ripple e faça login para começar." },
+    err: { title: "Link inválido", msg: "Este link expirou ou já foi usado. Abra o Ripple e tente se cadastrar novamente para receber um novo." },
+    cta: "Abrir Ripple"
+  }
+};
+
+function pickLang() {
+  try { var s = localStorage.getItem("ripple_policy_lang"); if (s && I18N[s]) return s; } catch (e) {}
+  var nav = (navigator.language || "es").slice(0,2).toLowerCase();
+  return I18N[nav] ? nav : "es";
+}
+
+function render(lang) {
+  var d = I18N[lang] || I18N.es;
+  var state = hasError ? d.err : d.ok;
+  document.documentElement.lang = d.htmlLang;
+  document.title = d.docTitle;
+  document.getElementById("icon").textContent = hasError ? "⚠️" : "✅";
+  document.getElementById("icon").className = "icon" + (hasError ? " err" : "");
+  document.getElementById("title").textContent = state.title;
+  document.getElementById("msg").textContent = state.msg;
+  document.getElementById("cta").textContent = d.cta;
+  var btns = document.querySelectorAll("#langs button");
+  for (var i=0;i<btns.length;i++) btns[i].classList.toggle("active", btns[i].dataset.lang === lang);
+  try { localStorage.setItem("ripple_policy_lang", lang); } catch (e) {}
+}
+
+var btns = document.querySelectorAll("#langs button");
+for (var i=0;i<btns.length;i++) btns[i].addEventListener("click", function(){ render(this.dataset.lang); });
+
+render(pickLang());
+</script>
+</body>
+</html>
